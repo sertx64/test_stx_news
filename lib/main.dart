@@ -133,8 +133,7 @@ class _TestNewsStxState extends State<TestNewsStx>
     isRefreshing = true;
     loadNews();
 
-    await Future.delayed(
-        const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     setState(() {
       isRefreshing = false;
     });
@@ -268,7 +267,10 @@ class _ContentwidgetState extends State<Contentwidget> {
                     apiContent?['data']['title']),
                 const SizedBox(height: 24),
                 const Divider(),
-                HtmlWidget(apiContent?['data']['text']),
+                HtmlWidget(
+                  apiContent?['data']['text'],
+                  textStyle: const TextStyle(fontSize: 18),
+                ),
               ],
             ));
   }
