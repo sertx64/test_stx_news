@@ -23,10 +23,10 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  MyHomePageState createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const information(),
+                  builder: (context) => const Information(),
                 ),
               );
             },
@@ -125,7 +125,7 @@ class _TestNewsStxState extends State<TestNewsStx>
   }
 
   void loadNews() async {
-    testX = await getApi('0', widget.tipCont).getContent();
+    testX = await GetApi('0', widget.tipCont).getContent();
     setState(() {});
   }
 
@@ -134,7 +134,7 @@ class _TestNewsStxState extends State<TestNewsStx>
     loadNews();
 
     await Future.delayed(
-        const Duration(seconds: 1)); // Симулируем загрузку данных
+        const Duration(seconds: 1));
     setState(() {
       isRefreshing = false;
     });
@@ -149,7 +149,7 @@ class _TestNewsStxState extends State<TestNewsStx>
             onRefresh: refresh,
             child: LoadMore(
                 onLoadMore: () async {
-                  testX?.addAll(await getApi(
+                  testX?.addAll(await GetApi(
                           testX?[testX!.length - 1]['date'], widget.tipCont)
                       .getContent());
                   setState(() {});
@@ -163,7 +163,7 @@ class _TestNewsStxState extends State<TestNewsStx>
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                contentWidget(idContent: testX?[index]['id']),
+                                Contentwidget(idContent: testX?[index]['id']),
                           ),
                         );
                       },
@@ -178,7 +178,7 @@ class _TestNewsStxState extends State<TestNewsStx>
                                     color: Color(0xFFAE0F38),
                                     fontSize: 16,
                                   ),
-                                  convDateTime()
+                                  ConvDateTime()
                                       .convStrToDate(testX?[index]['date']),
                                 ),
                                 Text(
@@ -205,15 +205,15 @@ class _TestNewsStxState extends State<TestNewsStx>
   }
 }
 
-class contentWidget extends StatefulWidget {
+class Contentwidget extends StatefulWidget {
   final String idContent;
-  const contentWidget({super.key, required this.idContent});
+  const Contentwidget({super.key, required this.idContent});
 
   @override
-  State<contentWidget> createState() => _contentWidgetState();
+  State<Contentwidget> createState() => _ContentwidgetState();
 }
 
-class _contentWidgetState extends State<contentWidget> {
+class _ContentwidgetState extends State<Contentwidget> {
   Map? apiContent;
 
   @override
@@ -223,7 +223,7 @@ class _contentWidgetState extends State<contentWidget> {
   }
 
   void loadNews() async {
-    apiContent = await getApiContent(widget.idContent).getContent();
+    apiContent = await GetApiContent(widget.idContent).getContent();
 
     setState(() {});
   }
@@ -252,14 +252,14 @@ class _contentWidgetState extends State<contentWidget> {
             body: ListView(
               padding: const EdgeInsets.all(16),
               children: [
-                imageNet(apiContent?['data']['img']),
+                ImageNet(apiContent?['data']['img']),
                 const SizedBox(height: 32),
                 Text(
                     style: const TextStyle(
                       color: Color(0xFFAE0F38),
                       fontSize: 16,
                     ),
-                    convDateTime().convStrToDate(apiContent?['data']['date'])),
+                    ConvDateTime().convStrToDate(apiContent?['data']['date'])),
                 Text(
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
@@ -274,8 +274,8 @@ class _contentWidgetState extends State<contentWidget> {
   }
 }
 
-class getApi {
-  getApi(this.dateCont, this.tipCont);
+class GetApi {
+  GetApi(this.dateCont, this.tipCont);
   final String dateCont;
   final String tipCont;
   Future<List> getContent() async {
@@ -289,8 +289,8 @@ class getApi {
   }
 }
 
-class getApiContent {
-  getApiContent(this.idCont);
+class GetApiContent {
+  GetApiContent(this.idCont);
   final String idCont;
 
   Future<Map> getContent() async {
@@ -305,7 +305,7 @@ class getApiContent {
   }
 }
 
-class convDateTime {
+class ConvDateTime {
   String convStrToDate(String dateTimeString) {
     final formatter = DateFormat('dd-MM-yy-HH-mm-SS');
     final List<String> d = dateTimeString.split('');
@@ -318,9 +318,9 @@ class convDateTime {
   }
 }
 
-class imageNet extends StatelessWidget {
-  const imageNet(this.urlimage, {super.key});
-  final urlimage;
+class ImageNet extends StatelessWidget {
+  const ImageNet(this.urlimage, {super.key});
+  final dynamic urlimage;
 
   @override
   Widget build(BuildContext context) {
@@ -337,8 +337,8 @@ class imageNet extends StatelessWidget {
   }
 }
 
-class information extends StatelessWidget {
-  const information({super.key});
+class Information extends StatelessWidget {
+  const Information({super.key});
 
   @override
   Widget build(BuildContext context) {
