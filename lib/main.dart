@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const infoWidget(),
+                  builder: (context) => const information(),
                 ),
               );
             },
@@ -319,26 +319,26 @@ class convDateTime {
 }
 
 class imageNet extends StatelessWidget {
-  const imageNet(this.urlImage, {super.key});
-  final urlImage;
+  const imageNet(this.urlimage, {super.key});
+  final urlimage;
 
   @override
   Widget build(BuildContext context) {
-    return (urlImage == null)
+    return (urlimage == null)
         ? const SizedBox(height: 1)
         : SizedBox(
             height: 250,
             child: ClipRect(
               child: Image.network(
-                urlImage,
+                urlimage,
                 fit: BoxFit.cover,
               ),
             ));
   }
 }
 
-class infoWidget extends StatelessWidget {
-  const infoWidget({super.key});
+class information extends StatelessWidget {
+  const information({super.key});
 
   @override
   Widget build(BuildContext context) {
