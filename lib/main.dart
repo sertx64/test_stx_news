@@ -269,6 +269,7 @@ class _ContentwidgetState extends State<Contentwidget> {
                 const Divider(),
                 HtmlWidget(
                   apiContent?['data']['text'],
+
                   textStyle: const TextStyle(fontSize: 18),
                 ),
               ],
