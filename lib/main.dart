@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'новости саратова',
+      title: 'Новости Саратова',
       home: MyHomePage(),
     );
   }
@@ -39,11 +39,11 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: const Color(0xFF0f1b25),
         actions: <Widget>[
           IconButton(
             color: Colors.white,
-            iconSize: 35.0,
+            iconSize: 33.0,
             icon: const Icon(Icons.info_outlined),
             onPressed: () {
               Navigator.push(
@@ -70,11 +70,13 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               'Саратова')
         ]),
         bottom: TabBar(
-          unselectedLabelColor: Colors.white60,
+          unselectedLabelColor: Colors.white,
           labelColor: Colors.white,
           indicatorColor: Colors.white,
-          indicatorWeight: 4.0,
-          labelStyle: const TextStyle(fontSize: 22),
+          indicatorSize: TabBarIndicatorSize.tab,
+          indicatorWeight: 2.5,
+          indicatorPadding: const EdgeInsets.all(7.0),
+          labelStyle: const TextStyle(fontFamily: 'Time', fontSize: 22),
           controller: _tabController,
           tabs: const <Widget>[
             Tab(text: 'лента'),
@@ -157,6 +159,8 @@ class _TestNewsStxState extends State<TestNewsStx>
                 },
                 child: ListView.separated(
                   itemBuilder: (context, index) => ListTile(
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 16.0),
                       onTap: () {
                         Navigator.push(
                           context,
@@ -190,7 +194,7 @@ class _TestNewsStxState extends State<TestNewsStx>
                                     ),
                                     testX?[index]['title']),
                               ])),
-                          const SizedBox(width: 5),
+                          const SizedBox(width: 3),
                           Image.network(width: 100, errorBuilder:
                               (BuildContext context, Object exception,
                                   StackTrace? stackTrace) {
@@ -233,7 +237,7 @@ class _ContentwidgetState extends State<Contentwidget> {
         ? const Scaffold(body: Center(child: Text('Загрузка')))
         : Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.black,
+              backgroundColor: const Color(0xFF0f1b25),
               foregroundColor: Colors.white,
               actions: <Widget>[
                 IconButton(
@@ -269,7 +273,6 @@ class _ContentwidgetState extends State<Contentwidget> {
                 const Divider(),
                 HtmlWidget(
                   apiContent?['data']['text'],
-
                   textStyle: const TextStyle(fontSize: 18),
                 ),
               ],
@@ -315,9 +318,14 @@ class ConvDateTime {
     final String dateFormat =
         '${d[0]}${d[1]}-${d[2]}${d[3]}-${d[4]}${d[5]}-${d[6]}${d[7]}-${d[8]}${d[9]}-${d[10]}${d[11]}';
     final datetime = formatter.parse(dateFormat);
-    final formattedFormatter = DateFormat('dd.MM.yy HH:mm');
+    final formattedFormatter = DateFormat('dd MMMM, ');
+    final formattedFormatter1 = DateFormat('HH:mm');
+    final nowDate = DateFormat('dd MMMM, ').format(DateTime.now());
+    String ddMMMM = ((formattedFormatter.format(datetime) == nowDate)
+        ? ''
+        : formattedFormatter.format(datetime));
 
-    return formattedFormatter.format(datetime);
+    return ddMMMM + formattedFormatter1.format(datetime);
   }
 }
 
@@ -347,7 +355,7 @@ class Information extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: const Color(0xFF0f1b25),
           foregroundColor: Colors.white,
         ),
         body: const Center(
