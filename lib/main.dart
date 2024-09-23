@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+//скелет основного экрана с 3-мя вкладками
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -86,7 +87,6 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         ),
       ),
       body: TabBarView(
-        //key: const PageStorageKey('tab_view_key'),
         controller: _tabController,
         children: const <Widget>[
           TestNewsStx(tipCont: ''),
